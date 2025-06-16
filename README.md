@@ -14,26 +14,6 @@ Our submission combines price-aware scoring, sequence modeling, and graph-based 
 
 ## Repository Structure
 
-cs145-recsys-team/
-├── checkpoint1/ # Content-based recommenders
-│ ├── gradboost.py
-│ └── cb_hyperparams.json
-├── checkpoint2/ # Sequence-based recommenders
-│ ├── transformer.py
-│ └── seq_config.json
-├── checkpoint3/ # Graph-based recommenders
-│ ├── light_gcn.py
-│ └── gnn_config.json
-├── final/ # Final integrated analysis (plots, ablations, etc.)
-├── experiments/ # Optional tuning scripts or notebooks
-├── submission.py # Final leaderboard submission entry point
-├── requirements.txt # Python dependencies
-└── README.md # Setup and usage instructions
-
-yaml
-Copy
-Edit
-
 ---
 
 ## Setup Instructions

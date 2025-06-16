@@ -6,7 +6,7 @@ This repository contains the full implementation of our models for the CS145 Rec
 
 ## Environment Setup
 
-Use the following commands to set up the project environment in **Google Colab**:
+Use the following commands to set up the project environment:
 
 ```bash
 # Clone the repository

@@ -1,0 +1,17 @@
+{
+    "TransformerRecommender": {
+      "seed": 42,
+      "device": "auto",
+      "price_exp": 1.0,
+      "dim": 192,
+      "layers": 2,
+      "heads": 6,
+      "dropout": 0.15,
+      "max_len": 75,
+      "batch": 512,
+      "lr": 0.0003,
+      "epochs": 20,
+      "patience": 4
+    }
+  }
+  

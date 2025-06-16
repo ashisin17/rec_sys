@@ -1,0 +1,16 @@
+{
+    "LightGCNRecommender": {
+      "n_epochs": 30,
+      "dim": 128,
+      "n_layers": 2,
+      "lr": 0.0008,
+      "batch_size": 4096,
+      "reg_lambda": 0.0008,
+      "edge_dropout": 0.5,
+      "patience": 8,
+      "price_exp": 0.6,
+      "root_price_loss": true,
+      "device": "auto"
+    }
+  }
+  

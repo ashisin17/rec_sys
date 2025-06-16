@@ -32,6 +32,13 @@ from pyspark.sql import SparkSession
 import random
 
 
+spark = SparkSession.builder \
+    .appName("RecSysVisualization") \
+    .master("local[*]") \
+    .config("spark.driver.memory", "4g") \
+    .config("spark.sql.shuffle.partitions", "8") \
+    .getOrCreate()
+
 def pandas_to_spark(df, spark_session):
     return spark_session.createDataFrame(df)
 

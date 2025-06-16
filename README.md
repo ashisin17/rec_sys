@@ -4,22 +4,31 @@ This repository contains the full implementation of our models for the CS145 Rec
 
 ---
 
-## Environment Setup (Google Colab)
+## Environment Setup
 
 Use the following commands to set up the project environment in **Google Colab**:
 
 ```bash
 # Clone the repository
-!git clone https://github.com/FrancoTSolis/CS145-RecSys.git
-%cd CS145-RecSys
+git clone https://github.com/FrancoTSolis/CS145-RecSys.git
+cd CS145-RecSys
 
 # Install Java (required by Spark)
-!apt-get install openjdk-17-jdk -y
-!java -version
+# On Linux Systems
+apt-get install openjdk-17-jdk -y
+# On non-Linux Systems
+Manually install OpenJDK 17 and add to system path variable https://adoptium.net/temurin/releases/?version=17
+
+# Check Java Installation
+java -version
+
+# Windows Only
+Download hadoop.dll and winutils.exe from https://github.com/cdarlint/winutils/tree/master/hadoop-3.3.5/bin
 
 # Install package manager and dependencies
-!pip install -q uv
-!uv pip install --upgrade "lightgbm<4.0"
+pip install -q uv
+uv pip install --upgrade "lightgbm<4.0"
+uv pip install torch-geometric
 
 
 ## Running the Models

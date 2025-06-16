@@ -40,10 +40,12 @@ from pyspark.sql import SparkSession
 
 
 
+def pandas_to_spark(df, spark_session):
+    return spark_session.createDataFrame(df)
 
-class LogisticRegressionRecommender(BaseRecommender):
+class LogisticRegressionRecommender:
     def __init__(self, seed=None, penalty='l2', C=1.0, spark_session=None):
-        super().__init__(seed)
+        self.seed = seed
         solver = 'liblinear' if penalty in ['l1', 'l2'] else 'saga'
         self.model = LogisticRegression(
             penalty=penalty,
@@ -92,13 +94,8 @@ class LogisticRegressionRecommender(BaseRecommender):
             print(f"[CV] Accuracy scores: {scores}")
             print(f"[CV] Mean accuracy: {np.mean(scores):.4f}")
 
-            
-            # --- Final Model Fit ---
             self.model.fit(X, y)
             self.feature_columns = X.columns
-
-    def pandas_to_spark(df, spark_session):
-        return spark_session.createDataFrame(df)
 
     def predict(self, log, k, users, items, user_features=None, item_features=None, filter_seen_items=True):
         cross = users.join(items).drop('__iter').toPandas().copy()
@@ -121,4 +118,5 @@ class LogisticRegressionRecommender(BaseRecommender):
         cross = cross.groupby('user_idx').head(k)
         cross['price'] = cross['orig_price']
 
-        return self.pandas_to_spark(cross[['user_idx', 'item_idx', 'relevance', 'price']], spark_session=self.spark_session)
+        return pandas_to_spark(cross[['user_idx', 'item_idx', 'relevance', 'price']], spark_session=self.spark_session)
+

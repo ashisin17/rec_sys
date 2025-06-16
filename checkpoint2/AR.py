@@ -38,7 +38,10 @@ from pyspark.sql import DataFrame
 from pyspark.sql import SparkSession
 
 
-class ARRecommender(BaseRecommender):
+def pandas_to_spark(df, spark_session):
+    return spark_session.createDataFrame(df)
+
+class ARRecommender:
     def __init__(self, order=2, max_seq_len=100, seed=None, spark=None, smoothing=None, k=0.001):
         super().__init__()
         self.order = order
@@ -111,9 +114,6 @@ class ARRecommender(BaseRecommender):
                 for item, _, response, _ in interactions:
                     self.item_scores[item] += response
 
-    def pandas_to_spark(df, spark_session):
-        return spark_session.createDataFrame(df)
-
     def _compute_probs(self):
         self.item_probs = {}
 
@@ -167,7 +167,7 @@ class ARRecommender(BaseRecommender):
             cross_pd = cross_pd.sort_values(by=["user_idx", "relevance"], ascending=[True, False])
             topk_pd = cross_pd.groupby("user_idx").head(k)
 
-            return self.pandas_to_spark(topk_pd[["user_idx", "item_idx", "relevance"]], self.spark)
+            return pandas_to_spark(topk_pd[["user_idx", "item_idx", "relevance"]], self.spark)
         else:
             cross = users.crossJoin(items)
 
@@ -192,4 +192,4 @@ class ARRecommender(BaseRecommender):
             cross_pd = cross_pd.sort_values(by=["user_idx", "relevance"], ascending=[True, False])
             topk_pd = cross_pd.groupby("user_idx").head(k)
 
-            return self.pandas_to_spark(topk_pd[["user_idx", "item_idx", "relevance"]], self.spark)
+            return pandas_to_spark(topk_pd[["user_idx", "item_idx", "relevance"]], self.spark)

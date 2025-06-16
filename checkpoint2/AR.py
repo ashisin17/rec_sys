@@ -38,7 +38,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql import SparkSession
 
 
-class ARRecommender:
+class ARRecommender(BaseRecommender):
     def __init__(self, order=2, max_seq_len=100, seed=None, spark=None, smoothing=None, k=0.001):
         super().__init__()
         self.order = order

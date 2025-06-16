@@ -41,7 +41,7 @@ from pyspark.sql import SparkSession
 
 
 
-class LogisticRegressionRecommender(MyRecommender):
+class LogisticRegressionRecommender(BaseRecommender):
     def __init__(self, seed=None, penalty='l2', C=1.0, spark_session=None):
         super().__init__(seed)
         solver = 'liblinear' if penalty in ['l1', 'l2'] else 'saga'
